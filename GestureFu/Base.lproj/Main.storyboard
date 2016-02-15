@@ -26,13 +26,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNK-gq-axi" userLabel="Connectors" customClass="ShapeView" customModule="GestureFu" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lau-bR-Mof" userLabel="Animation" customClass="ShapeView" customModule="GestureFu" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="UNK-gq-axi" secondAttribute="bottom" id="2Ls-ob-1xH"/>
                             <constraint firstAttribute="topMargin" secondItem="Mvu-PA-MhX" secondAttribute="top" id="3ak-8r-Ugs"/>
+                            <constraint firstItem="UNK-gq-axi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9Pg-Rw-Ju5"/>
+                            <constraint firstAttribute="topMargin" secondItem="UNK-gq-axi" secondAttribute="top" id="DHd-aT-vcQ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Lau-bR-Mof" secondAttribute="bottom" id="Edk-Nz-pXi"/>
+                            <constraint firstAttribute="trailing" secondItem="Lau-bR-Mof" secondAttribute="trailing" id="Ej0-4H-fET"/>
                             <constraint firstAttribute="bottomMargin" secondItem="mcA-Mw-Gl0" secondAttribute="bottom" id="GpK-S9-VV3"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Mvu-PA-MhX" secondAttribute="bottom" id="IIa-yc-CHu"/>
+                            <constraint firstAttribute="topMargin" secondItem="Lau-bR-Mof" secondAttribute="top" id="M52-Hp-Zue"/>
+                            <constraint firstItem="Lau-bR-Mof" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tlm-jH-Wcd"/>
+                            <constraint firstAttribute="trailing" secondItem="UNK-gq-axi" secondAttribute="trailing" id="Waq-KP-NVm"/>
                             <constraint firstItem="Mvu-PA-MhX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="c0e-lv-5jP"/>
                             <constraint firstAttribute="topMargin" secondItem="mcA-Mw-Gl0" secondAttribute="top" id="eEB-j0-DDl"/>
                             <constraint firstAttribute="trailing" secondItem="Mvu-PA-MhX" secondAttribute="trailing" id="lAy-Hz-1Xf"/>
@@ -41,10 +57,13 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Hfg-gF-FPF" appends="YES" id="OdF-uG-Fca"/>
+                            <outletCollection property="gestureRecognizers" destination="nV2-d1-mAY" appends="YES" id="ikF-hd-OQH"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="viewAnimation" destination="Lau-bR-Mof" id="rXN-6s-0VQ"/>
                         <outlet property="viewCanvas" destination="mcA-Mw-Gl0" id="mMb-Kz-9Xq"/>
+                        <outlet property="viewConnectors" destination="UNK-gq-axi" id="MwT-tq-AbO"/>
                         <outlet property="viewDraw" destination="Mvu-PA-MhX" id="T9l-1M-Asr"/>
                     </connections>
                 </viewController>
@@ -55,6 +74,11 @@
                         <outlet property="delegate" destination="BYZ-38-t0r" id="J57-mC-Sxv"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="nV2-d1-mAY">
+                    <connections>
+                        <action selector="handleTap:" destination="BYZ-38-t0r" id="H43-ze-ypg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="427" y="374"/>
         </scene>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BB8D3FB91C70BFBB004D1626 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = BB8D3FB81C70BFBB004D1626 /* Cartfile */; };
 		BB8D3FBB1C70C087004D1626 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8D3FBA1C70C087004D1626 /* Chameleon.framework */; };
+		BB8D3FBF1C721411004D1626 /* ConnectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8D3FBE1C721411004D1626 /* ConnectorView.swift */; };
 		BB979CED1C6F7C780093921C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB979CEC1C6F7C780093921C /* AppDelegate.swift */; };
 		BB979CEF1C6F7C780093921C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB979CEE1C6F7C780093921C /* ViewController.swift */; };
 		BB979CF21C6F7C780093921C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB979CF01C6F7C780093921C /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		BB8D3FB81C70BFBB004D1626 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		BB8D3FBA1C70C087004D1626 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
+		BB8D3FBE1C721411004D1626 /* ConnectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectorView.swift; sourceTree = "<group>"; };
 		BB979CE91C6F7C780093921C /* GestureFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB979CEC1C6F7C780093921C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB979CEE1C6F7C780093921C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				BB979CEC1C6F7C780093921C /* AppDelegate.swift */,
 				BB979CEE1C6F7C780093921C /* ViewController.swift */,
 				BB979CFE1C6F7DA30093921C /* ShapeView.swift */,
+				BB8D3FBE1C721411004D1626 /* ConnectorView.swift */,
 				BB979CF01C6F7C780093921C /* Main.storyboard */,
 				BB979CF31C6F7C780093921C /* Assets.xcassets */,
 				BB979CF51C6F7C780093921C /* LaunchScreen.storyboard */,
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8D3FBF1C721411004D1626 /* ConnectorView.swift in Sources */,
 				BB979CFF1C6F7DA30093921C /* ShapeView.swift in Sources */,
 				BB979CEF1C6F7C780093921C /* ViewController.swift in Sources */,
 				BB979CED1C6F7C780093921C /* AppDelegate.swift in Sources */,
@@ -298,6 +302,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appgranula.GestureFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -313,6 +318,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appgranula.GestureFu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

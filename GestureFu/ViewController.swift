@@ -13,6 +13,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var viewDraw : ShapeView?
     @IBOutlet var viewCanvas : UIView?
+    @IBOutlet var viewConnectors : UIView?
+    @IBOutlet var viewAnimation : ShapeView?
     
     var currentPath : UIBezierPath?
     var startPoint : CGPoint?
@@ -25,15 +27,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         square.addLineToPoint(CGPoint(x: 100, y: 100))
         square.addLineToPoint(CGPoint(x: 0, y: 100))
         square.addLineToPoint(CGPoint(x: 0, y: 0))
+        square.closePath()
 
         let triangle = UIBezierPath();
         triangle.moveToPoint(CGPoint(x: 50, y: 0))
         triangle.addLineToPoint(CGPoint(x: 100, y: 100))
+        triangle.addLineToPoint(CGPoint(x: 50, y: 100))
         triangle.addLineToPoint(CGPoint(x: 0, y: 100))
         triangle.addLineToPoint(CGPoint(x: 50, y: 0))
+        triangle.closePath()
         
         let circle = UIBezierPath()
         circle.addArcWithCenter(CGPoint(x: 50, y: 50), radius: 50, startAngle: 0, endAngle: 4*CGFloat(M_PI_2), clockwise: true)
+        circle.closePath()
 
         return [square, circle, triangle]
     }
@@ -72,24 +78,65 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.viewDraw?.shapeLayer.path = self.currentPath?.CGPath
     }
     
-    func endPath(endPoint: CGPoint) {
-        let view = ShapeView()
-        var path = self.standardPathForGesturePath(self.currentPath!)
-        
-        if path == nil {
-            path = UIBezierPath()
-            path?.moveToPoint(self.startPoint!)
-            path?.addLineToPoint(endPoint)
+    func endPath(point: CGPoint) {
+        if let path = self.standardPathForGesturePath(self.currentPath!) {
+            let view = ShapeView()
+            view.shapeLayer.path        = path.CGPath
+            view.shapeLayer.strokeColor = UIColor.randomFlatColor().CGColor
+            view.shapeLayer.fillColor   = UIColor.clearColor().CGColor
+            view.shapeLayer.lineWidth   = 6;
+            self.viewCanvas!.addSubview(view)
+        } else {
+            let start = self.startPoint!
+            let end = point
+            
+            var startView : ShapeView?
+            var endView : ShapeView?
+            
+            for subView in (self.viewCanvas?.subviews)! {
+                if let layerView = subView as? ShapeView {
+                    if startView == nil {
+                        if CGPathContainsPoint(layerView.shapeLayer.path, nil, start, false) {
+                            startView = layerView
+                        }
+                    }
+                    if endView == nil {
+                        if  CGPathContainsPoint(layerView.shapeLayer.path, nil, end, false) {
+                            endView = layerView
+                        }
+                    }
+                }
+            }
+            
+            if startView != nil && endView != nil {
+                self.addConnector(startView, to: endView)
+            }
         }
-
-        view.shapeLayer.path        = path!.CGPath
-        view.shapeLayer.strokeColor = UIColor.randomFlatColor().CGColor
-        view.shapeLayer.fillColor   = UIColor.clearColor().CGColor
-        view.shapeLayer.lineWidth   = 2;
-        self.viewCanvas!.addSubview(view)
         
         self.currentPath = nil
         self.viewDraw?.shapeLayer.path = nil
+    }
+    
+    func addConnector(from: ShapeView!, to: ShapeView!) {
+        let path = UIBezierPath()
+        
+        let startFrame = CGPathGetBoundingBox(from.shapeLayer.path)
+        let startPoint = CGPoint(x:CGRectGetMidX(startFrame), y:CGRectGetMidY(startFrame))
+        
+        let endFrame = CGPathGetBoundingBox(to.shapeLayer.path)
+        let endPoint = CGPoint(x:CGRectGetMidX(endFrame), y:CGRectGetMidY(endFrame))
+        
+        path.moveToPoint(startPoint)
+        path.addLineToPoint(endPoint)
+        
+        let view  = ConnectorView()
+        view.from = from
+        view.to   = to
+        view.shapeLayer.path        = path.CGPath
+        view.shapeLayer.strokeColor = UIColor.randomFlatColor().CGColor
+        view.shapeLayer.fillColor   = UIColor.clearColor().CGColor
+        view.shapeLayer.lineWidth   = 2;
+        self.viewConnectors!.addSubview(view)
     }
     
     func cancelPath() {
@@ -105,12 +152,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         for standard in self.standardPaths {
             let score = standard.compreForms(path)
             if (bestScore < score) {
-                bestScore = score
+                bestScore    = score
                 bestStandard = standard
             }
         }
 
-        if (bestScore < 0.85) {
+        if (bestScore < 0.80) {
             return nil
         }
 
@@ -118,13 +165,44 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return bestStandard!
     }
     
+    @IBAction func handleTap (recognizer: UITapGestureRecognizer) -> Void {
+        let point = recognizer.locationInView(self.view)
+        for subView in (self.viewConnectors?.subviews)! {
+            if let layerView = subView as? ConnectorView {
+                let shapeLayer = layerView.shapeLayer
+                let path       = shapeLayer.path
+                let testPath   = CGPathCreateCopyByStrokingPath(path, nil, 35.0, UIBezierPath().lineCapStyle, UIBezierPath().lineJoinStyle, UIBezierPath().miterLimit)
+                let tapTarget = UIBezierPath(CGPath: testPath!)
+                if(tapTarget.containsPoint(point)) {
+                    self.onTapConnector(layerView)
+                }
+            }
+        }
+    }
+    
+    func onTapConnector(connector: ConnectorView) {
+        let fromPath = connector.from?.shapeLayer.path!;
+        let toPath   = connector.to?.shapeLayer.path!;
+
+        self.viewAnimation?.shapeLayer.removeAllAnimations()
+        self.viewAnimation?.shapeLayer.lineWidth   = 2;
+        self.viewAnimation?.shapeLayer.strokeColor = UIColor.randomFlatColor().CGColor
+        self.viewAnimation?.shapeLayer.fillColor   = UIColor.clearColor().CGColor
+        self.viewAnimation?.shapeLayer.lineWidth   = 6;
+
+        let animation         = CABasicAnimation(keyPath: "path")
+        animation.duration    = 1
+        animation.fromValue   = fromPath
+        animation.toValue     = toPath
+        animation.repeatCount = 1
+        
+        self.viewAnimation?.shapeLayer.addAnimation(animation, forKey: "path")
+    }
 }
 
 extension UIBezierPath {
     func alignToPath(path: UIBezierPath!) -> Void {
         let frame = CGPathGetBoundingBox(path.CGPath)
-//        let ratio = min(frame.size.width/self.bounds.size.width,
-//            frame.height/self.bounds.size.height)
         
         let ratioX = frame.size.width/self.bounds.size.width;
         let ratioY = frame.height/self.bounds.size.height;

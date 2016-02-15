@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB8D3FB91C70BFBB004D1626 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = BB8D3FB81C70BFBB004D1626 /* Cartfile */; };
+		BB8D3FBB1C70C087004D1626 /* Chameleon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8D3FBA1C70C087004D1626 /* Chameleon.framework */; };
 		BB979CED1C6F7C780093921C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB979CEC1C6F7C780093921C /* AppDelegate.swift */; };
 		BB979CEF1C6F7C780093921C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB979CEE1C6F7C780093921C /* ViewController.swift */; };
 		BB979CF21C6F7C780093921C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB979CF01C6F7C780093921C /* Main.storyboard */; };
 		BB979CF41C6F7C780093921C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB979CF31C6F7C780093921C /* Assets.xcassets */; };
 		BB979CF71C6F7C780093921C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB979CF51C6F7C780093921C /* LaunchScreen.storyboard */; };
+		BB979CFF1C6F7DA30093921C /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB979CFE1C6F7DA30093921C /* ShapeView.swift */; };
+		BB979D011C6F7F880093921C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB979D001C6F7F880093921C /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB8D3FB81C70BFBB004D1626 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
+		BB8D3FBA1C70C087004D1626 /* Chameleon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chameleon.framework; path = Carthage/Build/iOS/Chameleon.framework; sourceTree = "<group>"; };
 		BB979CE91C6F7C780093921C /* GestureFu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestureFu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB979CEC1C6F7C780093921C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB979CEE1C6F7C780093921C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +28,8 @@
 		BB979CF31C6F7C780093921C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB979CF61C6F7C780093921C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB979CF81C6F7C780093921C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB979CFE1C6F7DA30093921C /* ShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		BB979D001C6F7F880093921C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8D3FBB1C70C087004D1626 /* Chameleon.framework in Frameworks */,
+				BB979D011C6F7F880093921C /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB8D3FBD1C70C15A004D1626 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB8D3FBA1C70C087004D1626 /* Chameleon.framework */,
+				BB979D001C6F7F880093921C /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BB979CE01C6F7C780093921C = {
 			isa = PBXGroup;
 			children = (
 				BB979CEB1C6F7C780093921C /* GestureFu */,
 				BB979CEA1C6F7C780093921C /* Products */,
+				BB8D3FBD1C70C15A004D1626 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,10 +76,12 @@
 			children = (
 				BB979CEC1C6F7C780093921C /* AppDelegate.swift */,
 				BB979CEE1C6F7C780093921C /* ViewController.swift */,
+				BB979CFE1C6F7DA30093921C /* ShapeView.swift */,
 				BB979CF01C6F7C780093921C /* Main.storyboard */,
 				BB979CF31C6F7C780093921C /* Assets.xcassets */,
 				BB979CF51C6F7C780093921C /* LaunchScreen.storyboard */,
 				BB979CF81C6F7C780093921C /* Info.plist */,
+				BB8D3FB81C70BFBB004D1626 /* Cartfile */,
 			);
 			path = GestureFu;
 			sourceTree = "<group>";
@@ -74,6 +96,7 @@
 				BB979CE51C6F7C780093921C /* Sources */,
 				BB979CE61C6F7C780093921C /* Frameworks */,
 				BB979CE71C6F7C780093921C /* Resources */,
+				BB8D3FBC1C70C0B0004D1626 /* Carthage copy framework */,
 			);
 			buildRules = (
 			);
@@ -124,17 +147,37 @@
 			files = (
 				BB979CF71C6F7C780093921C /* LaunchScreen.storyboard in Resources */,
 				BB979CF41C6F7C780093921C /* Assets.xcassets in Resources */,
+				BB8D3FB91C70BFBB004D1626 /* Cartfile in Resources */,
 				BB979CF21C6F7C780093921C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BB8D3FBC1C70C0B0004D1626 /* Carthage copy framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Chameleon.framework",
+			);
+			name = "Carthage copy framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BB979CE51C6F7C780093921C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB979CFF1C6F7DA30093921C /* ShapeView.swift in Sources */,
 				BB979CEF1C6F7C780093921C /* ViewController.swift in Sources */,
 				BB979CED1C6F7C780093921C /* AppDelegate.swift in Sources */,
 			);
@@ -247,6 +290,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GestureFu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appgranula.GestureFu;
@@ -258,6 +305,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = GestureFu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appgranula.GestureFu;
@@ -284,6 +335,7 @@
 				BB979CFD1C6F7C780093921C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
